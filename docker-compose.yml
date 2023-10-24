@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:13.12-alpine3.18
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+
+  python:
+    image: python:3.9.18-slim-bullseye
+    command: "python /code/manage.py runserver ${HOST:-0.0.0.0}:${PORT:-8000}"
+    volumes:
+      - .:/code
+    ports:
+      - "${PORT:-8000}:${PORT:-8000}"
+    depends_on:
+      - postgres
+    environment:
+      - DATABASE_URL=${DB_URL}
+
+volumes:
+  postgres_data:
