@@ -46,7 +46,5 @@ class TasksControllerTests(TestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    # Add other tests similarly...
-
     def tearDown(self):
         pass
