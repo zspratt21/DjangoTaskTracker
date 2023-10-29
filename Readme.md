@@ -50,7 +50,7 @@ Deletes an existing task with the specified id.
 ### Running the tests
 Connect your IDE to the testing container or run the tests in the web container:
 ```bash
-docker-compose exec python python-web manage.py test
+docker-compose exec python-web python manage.py test
 ```
 ### Made With
 [Python](https://www.python.org/)  
